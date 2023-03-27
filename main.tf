@@ -8,8 +8,17 @@ resource "aws_docdb_cluster" "main" {
   preferred_backup_window = var.preferred_backup_window
   skip_final_snapshot     = true
   kms_key_id = data.aws_kms_key.key.arn
-  storage_encrypted = true
+  storage_encrypted = var.storage_encrypted
   
+}
+
+resource "aws_docdb_cluster_instance" "cluster_instances" {
+    count = var.no_of_instances
+    identifier = "${var.env}-docdb-${count.index}"
+    cluster_identifier = aws_docdb_cluster.main.id
+    instance_class = var.instance_class
+
+   
 }
 
 
