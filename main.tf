@@ -20,3 +20,12 @@ resource "aws_docdb_cluster_instance" "cluster_instances" {
   instance_class     = var.instance_class
 }
 
+resource "aws_docdb_subnet_group" "main" {
+    name = "${var.env}-docdb"
+    subnet_ids = var.subnet_ids
+
+    tags = merge(
+      var.tags,
+        { Name = "${var.env}-subnet-group" }
+    )
+}
