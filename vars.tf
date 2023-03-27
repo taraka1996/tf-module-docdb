@@ -12,4 +12,3 @@ variable "storage_encrypted" {
 
 }
 
-variable "instance_class" {}
